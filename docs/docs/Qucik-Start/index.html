@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="快速开始 Read More    "><meta property="og:title" content="" />
-<meta property="og:description" content="快速开始 Read More    " />
+<meta name="description" content="快速开始 Docker 方式安装    Docker Configuration Reference  Using MySQL as a database backend   $ docker pull rundeck/rundeck:3.3.8 # 事先创建 rundeck 库 $ docker run -d --name rundeck -p 4440:4440 -e TZ=&#34;Asia/Shanghai&#34; \ 	-v /private/docker/volumes/rundeck/data:/home/rundeck/server/data \ 	-v /private/docker/volumes/rundeck/user-assets:/home/rundeck/user-assets \ 	-e RUNDECK_DATABASE_DRIVER=org.mariadb.jdbc.Driver \ 	-e RUNDECK_DATABASE_URL=&#34;jdbc:mysql:///rundeck?autoReconnect=true&amp;useSSL=false&#34; \ 	-e RUNDECK_DATABASE_USERNAME=&#34;admin&#34; \ 	-e RUNDECK_DATABASE_PASSWORD=&#34;admin@123123&#34; \ 	rundeck/rundeck:3.3.8 # 观察日志，直到出现： running at http://0.0.0.0:4440/ $ docker logs -f rundeck # 默认密码 admin / admin $ curl http://127."><meta property="og:title" content="" />
+<meta property="og:description" content="快速开始 Docker 方式安装    Docker Configuration Reference  Using MySQL as a database backend   $ docker pull rundeck/rundeck:3.3.8 # 事先创建 rundeck 库 $ docker run -d --name rundeck -p 4440:4440 -e TZ=&#34;Asia/Shanghai&#34; \ 	-v /private/docker/volumes/rundeck/data:/home/rundeck/server/data \ 	-v /private/docker/volumes/rundeck/user-assets:/home/rundeck/user-assets \ 	-e RUNDECK_DATABASE_DRIVER=org.mariadb.jdbc.Driver \ 	-e RUNDECK_DATABASE_URL=&#34;jdbc:mysql:///rundeck?autoReconnect=true&amp;useSSL=false&#34; \ 	-e RUNDECK_DATABASE_USERNAME=&#34;admin&#34; \ 	-e RUNDECK_DATABASE_PASSWORD=&#34;admin@123123&#34; \ 	rundeck/rundeck:3.3.8 # 观察日志，直到出现： running at http://0.0.0.0:4440/ $ docker logs -f rundeck # 默认密码 admin / admin $ curl http://127." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Rundeck/docs/Qucik-Start/" />
-
+<meta property="article:modified_time" content="2021-01-04T10:55:29+08:00" />
 <title>Qucik Start | Rundeck</title>
 <link rel="icon" href="/Rundeck/favicon.png" type="image/x-icon">
 
@@ -95,6 +95,10 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#快速开始">快速开始</a>
       <ul>
+        <li><a href="#docker-方式安装">Docker 方式安装</a></li>
+        <li><a href="#基本概念">基本概念</a></li>
+        <li><a href="#创建-project">创建 Project</a></li>
+        <li><a href="#新增-远程-node">新增 远程 Node</a></li>
         <li><a href="#read-more">Read More</a></li>
       </ul>
     </li>
@@ -110,9 +114,160 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown"><h1 id="快速开始">快速开始</h1>
-<h2 id="read-more">Read More</h2>
+<h2 id="docker-方式安装">Docker 方式安装</h2>
+<blockquote>
 <ul>
-<li></li>
+<li>
+  <a href="https://docs.rundeck.com/docs/administration/configuration/docker.html">Docker Configuration Reference</a></li>
+<li>
+  <a href="https://docs.rundeck.com/docs/administration/configuration/database/mysql.html">Using MySQL as a database backend</a></li>
+</ul>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker pull rundeck/rundeck:3.3.8
+
+<span style="color:#75715e"># 事先创建 rundeck 库</span>
+$ docker run -d --name rundeck -p 4440:4440 -e TZ<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Asia/Shanghai&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	-v /private/docker/volumes/rundeck/data:/home/rundeck/server/data <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	-v /private/docker/volumes/rundeck/user-assets:/home/rundeck/user-assets <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	-e RUNDECK_DATABASE_DRIVER<span style="color:#f92672">=</span>org.mariadb.jdbc.Driver <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	-e RUNDECK_DATABASE_URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jdbc:mysql:///rundeck?autoReconnect=true&amp;useSSL=false&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	-e RUNDECK_DATABASE_USERNAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;admin&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	-e RUNDECK_DATABASE_PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;admin@123123&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	rundeck/rundeck:3.3.8
+
+<span style="color:#75715e"># 观察日志，直到出现： running at http://0.0.0.0:4440/</span>
+$ docker logs -f rundeck
+	
+<span style="color:#75715e"># 默认密码 admin / admin</span>
+$ curl http://127.0.0.1:4440/
+</code></pre></div><h2 id="基本概念">基本概念</h2>
+<blockquote>
+<p>@see <a href="https://blog.csdn.net/liumiaocn/article/details/89150310">https://blog.csdn.net/liumiaocn/article/details/89150310</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Project</td>
+<td>Project 是进行 Job 管理的场所，也是 Rundeck 使用时的具体实例，Rundeck 可以运行多个 Project</td>
+</tr>
+<tr>
+<td align="center">Jobs</td>
+<td>Job 是相关操作的步骤与设定选项以及执行 Job 的 Node 所组成，而在实际的场景中，很多运维的例行操作都可以在 Rundeck 中以 job 的方式进行定义。</td>
+</tr>
+<tr>
+<td align="center">Nodes</td>
+<td>物理机器或者网络可访问的虚拟设备，是 Rundeck 中管理的资源类型，在 Rundeck 中将 Job 和 Node 进行了连接，使得整体可以进行管理。</td>
+</tr>
+<tr>
+<td align="center">Commands</td>
+<td>相较于 Job，Command 是可以在 Node 上进行单次执行的可执行的命令，通过 Rundeck 在指定的 Node 上进行此命令的执行。</td>
+</tr>
+<tr>
+<td align="center">Executions</td>
+<td>运维的操作在 Rundeck 中抽象成 Job 和 Command，其每次执行都类似与实际运维作业中的例行操作或者一次性的手工操作，每次操作在 Rundeck 中就以 Execution 的形式存在，通过对 Execution，可以更好的确认 Job 或者Command 执行的状态/和结果。</td>
+</tr>
+<tr>
+<td align="center">Plugins</td>
+<td>Rundeck 很多功能都是通过插件的方式来进行设计实现的，Rundeck 本身也有很多社区类型或者商业类型的插件提供给用户使用。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="创建-project">创建 Project</h2>
+<blockquote>
+<ul>
+<li>
+  <a href="https://docs.rundeck.com/docs/administration/projects/project-create.html">Project Create</a></li>
+<li>
+  <a href="https://docs.rundeck.com/docs/manual/06-commands.html">Commands</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>访问 127.0.0.1:4440 进入 Rundeck 后，点击 <strong>New Project</strong></li>
+<li><strong>Project Name</strong> 输出 <em>Dev_Learn_Machine</em></li>
+<li>点击 <strong>Create</strong> 创建</li>
+<li>http://127.0.0.1:4440/project/Dev_Learn_Machine/command/run 进入 <strong>Commands</strong> 页面</li>
+<li>下拉框 <strong>Show all nodes</strong>   &gt;  Search， 展示的 Node 是 Rundeck 自身的节点</li>
+<li>在 <strong>Enter a command</strong> 中输入 <code>ls -al</code>  &gt; 点击运行，查看 Node 上执行命令的结果</li>
+</ul>
+<h2 id="新增-远程-node">新增 远程 Node</h2>
+<blockquote>
+<ul>
+<li>
+  <a href="https://docs.rundeck.com/docs/manual/document-format-reference/resource-v13.html">RESOURCE-XML</a></li>
+</ul>
+</blockquote>
+<ol>
+<li>
+<p>新增 Key Storage 用于存储<strong>登陆远程 Node 的秘钥信息</strong></p>
+<ul>
+<li>右上角菜单 &gt; Key Storage (<code>/menu/storage</code>)</li>
+<li><strong>Add or Upload a Key</strong> ，这里选择 <strong>Password</strong></li>
+<li>输入： 密码、存储路径、名称</li>
+</ul>
+</li>
+<li>
+<p>设置项目默认 Executor</p>
+<ul>
+<li>进入 Dev_Learn_Machine &gt; Project Settings &gt; <strong>Edit Configuration&hellip;</strong> &gt; Default Node Executor</li>
+<li>选择 SSH 方式
+<ul>
+<li><strong>SSH Password Storage Path</strong>： 选择上一步保存的 密码</li>
+<li><strong>SSH Authentication</strong>：password</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>增加 Node Source</p>
+<ul>
+<li>进入 Dev_Learn_Machine &gt; Project Settings &gt; <strong>Edit Nodes&hellip;</strong> &gt; Source
+<ul>
+<li>/project/Dev_Learn_Machine/nodes/sources#sources</li>
+</ul>
+</li>
+<li><strong>Add a new Node Source</strong> &gt; 选择 File （该类型可在线编辑，存储在 Rundeck 本地 Node）</li>
+<li><strong>Format</strong>： resourcexml</li>
+<li><strong>File Path</strong>：/home/rundeck/user-assets/nodes.xml</li>
+<li><strong>Generate</strong>：勾选</li>
+<li><strong>Writeable</strong>：勾选</li>
+</ul>
+</li>
+<li>
+<p>编辑 /home/rundeck/user-assets/nodes.xml</p>
+<ul>
+<li>
+<p>打开 Edit Tab（/project/Dev_Learn_Machine/nodes/sources）</p>
+</li>
+<li>
+<p>内容如下：</p>
+</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+
+<span style="color:#f92672">&lt;project&gt;</span>
+  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;learn218&#34;</span> <span style="color:#a6e22e">description=</span><span style="color:#e6db74">&#34;学习机218&#34;</span> <span style="color:#a6e22e">tags=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#a6e22e">hostname=</span><span style="color:#e6db74">&#34;172.16.2.218:2208&#34;</span> <span style="color:#a6e22e">osArch=</span><span style="color:#e6db74">&#34;amd64&#34;</span> <span style="color:#a6e22e">osFamily=</span><span style="color:#e6db74">&#34;unix&#34;</span> <span style="color:#a6e22e">osName=</span><span style="color:#e6db74">&#34;Linux&#34;</span> <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;master&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;learn219&#34;</span> <span style="color:#a6e22e">description=</span><span style="color:#e6db74">&#34;学习机219&#34;</span> <span style="color:#a6e22e">tags=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#a6e22e">hostname=</span><span style="color:#e6db74">&#34;172.16.2.219:2208&#34;</span> <span style="color:#a6e22e">osArch=</span><span style="color:#e6db74">&#34;amd64&#34;</span> <span style="color:#a6e22e">osFamily=</span><span style="color:#e6db74">&#34;unix&#34;</span> <span style="color:#a6e22e">osName=</span><span style="color:#e6db74">&#34;Linux&#34;</span> <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;master&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;learn220&#34;</span> <span style="color:#a6e22e">description=</span><span style="color:#e6db74">&#34;学习机220&#34;</span> <span style="color:#a6e22e">tags=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#a6e22e">hostname=</span><span style="color:#e6db74">&#34;172.16.2.220:2208&#34;</span> <span style="color:#a6e22e">osArch=</span><span style="color:#e6db74">&#34;amd64&#34;</span> <span style="color:#a6e22e">osFamily=</span><span style="color:#e6db74">&#34;unix&#34;</span> <span style="color:#a6e22e">osName=</span><span style="color:#e6db74">&#34;Linux&#34;</span> <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;master&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;learn221&#34;</span> <span style="color:#a6e22e">description=</span><span style="color:#e6db74">&#34;学习机221&#34;</span> <span style="color:#a6e22e">tags=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#a6e22e">hostname=</span><span style="color:#e6db74">&#34;172.16.2.221:2208&#34;</span> <span style="color:#a6e22e">osArch=</span><span style="color:#e6db74">&#34;amd64&#34;</span> <span style="color:#a6e22e">osFamily=</span><span style="color:#e6db74">&#34;unix&#34;</span> <span style="color:#a6e22e">osName=</span><span style="color:#e6db74">&#34;Linux&#34;</span> <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;master&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;learn222&#34;</span> <span style="color:#a6e22e">description=</span><span style="color:#e6db74">&#34;学习机222&#34;</span> <span style="color:#a6e22e">tags=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#a6e22e">hostname=</span><span style="color:#e6db74">&#34;172.16.2.222:2208&#34;</span> <span style="color:#a6e22e">osArch=</span><span style="color:#e6db74">&#34;amd64&#34;</span> <span style="color:#a6e22e">osFamily=</span><span style="color:#e6db74">&#34;unix&#34;</span> <span style="color:#a6e22e">osName=</span><span style="color:#e6db74">&#34;Linux&#34;</span> <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;master&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;learn223&#34;</span> <span style="color:#a6e22e">description=</span><span style="color:#e6db74">&#34;学习机223&#34;</span> <span style="color:#a6e22e">tags=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#a6e22e">hostname=</span><span style="color:#e6db74">&#34;172.16.2.223:2208&#34;</span> <span style="color:#a6e22e">osArch=</span><span style="color:#e6db74">&#34;amd64&#34;</span> <span style="color:#a6e22e">osFamily=</span><span style="color:#e6db74">&#34;unix&#34;</span> <span style="color:#a6e22e">osName=</span><span style="color:#e6db74">&#34;Linux&#34;</span> <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;master&#34;</span><span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/project&gt;</span>
+</code></pre></div><h2 id="read-more">Read More</h2>
+<ul>
+<li>Administration Guide
+<ul>
+<li>
+  <a href="https://docs.rundeck.com/docs/administration/install/">Installation</a></li>
+</ul>
+</li>
 </ul>
 </article>
  
@@ -123,6 +278,14 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex justify-between">
 
 
+
+  <div>
+    
+    <a class="flex align-center" href="https://github.com/hello-world-example/Rundeck/commit/f58c217c3b3cdd4d65dee886f82b75b2609c65b2" title='Last modified by kaibin.yang | Jan 4, 2021' target="_blank" rel="noopener">
+      <img src="/Rundeck/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>Jan 4, 2021</span>
+    </a>
+  </div>
 
 
 
@@ -169,6 +332,10 @@ for(var i=0; i<images.length; i++){
   <ul>
     <li><a href="#快速开始">快速开始</a>
       <ul>
+        <li><a href="#docker-方式安装">Docker 方式安装</a></li>
+        <li><a href="#基本概念">基本概念</a></li>
+        <li><a href="#创建-project">创建 Project</a></li>
+        <li><a href="#新增-远程-node">新增 远程 Node</a></li>
         <li><a href="#read-more">Read More</a></li>
       </ul>
     </li>

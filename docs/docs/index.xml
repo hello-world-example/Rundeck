@@ -15,7 +15,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Rundeck/docs/Qucik-Start/</guid>
-      <description>快速开始 Read More    </description>
+      <description>快速开始 Docker 方式安装    Docker Configuration Reference  Using MySQL as a database backend   $ docker pull rundeck/rundeck:3.3.8 # 事先创建 rundeck 库 $ docker run -d --name rundeck -p 4440:4440 -e TZ=&amp;#34;Asia/Shanghai&amp;#34; \ 	-v /private/docker/volumes/rundeck/data:/home/rundeck/server/data \ 	-v /private/docker/volumes/rundeck/user-assets:/home/rundeck/user-assets \ 	-e RUNDECK_DATABASE_DRIVER=org.mariadb.jdbc.Driver \ 	-e RUNDECK_DATABASE_URL=&amp;#34;jdbc:mysql:///rundeck?autoReconnect=true&amp;amp;useSSL=false&amp;#34; \ 	-e RUNDECK_DATABASE_USERNAME=&amp;#34;admin&amp;#34; \ 	-e RUNDECK_DATABASE_PASSWORD=&amp;#34;admin@123123&amp;#34; \ 	rundeck/rundeck:3.3.8 # 观察日志，直到出现： running at http://0.0.0.0:4440/ $ docker logs -f rundeck # 默认密码 admin / admin $ curl http://127.</description>
     </item>
     
   </channel>
